@@ -7,5 +7,4 @@ for _ in range(int(sys.stdin.readline())):
         dic[name] += 1
     else:
         dic[name] = 1
-result = sorted(sorted(dic.items()), key=lambda x: x[1], reverse=True)
-print(result[0][0])
+print(sorted(sorted(dic.items()), key=lambda x: x[1], reverse=True)[0][0])

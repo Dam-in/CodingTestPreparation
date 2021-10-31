@@ -3,7 +3,7 @@ def male(state, num):
     global N
     for i in range(1, N+1):
         if i % num == 0:
-            state[i] = (state[i]+1)%2
+            state[i] = switch[state[i]]
 
 
 def female(state, num):
@@ -18,14 +18,15 @@ def female(state, num):
             break
     state[num] = (state[num]+1)%2
     for i in range(x+1):
-            state[num-i] = (state[num-i]+1)%2
-            state[num+i] = (state[num+i]+1)%2
+            state[num-i] = switch[state[num-i]]
+            state[num+i] = switch[state[num+i]]
 
 
 import sys
 N = int(sys.stdin.readline())
 state = list(map(int, sys.stdin.readline().split(' ')))
 state.insert(0, 0)
+switch = {0: 1, 1: 0}
 for _ in range(int(sys.stdin.readline())):
     gender, num = map(int, sys.stdin.readline().split())
     if gender == 1:
@@ -39,33 +40,29 @@ for i in range(1, N+1):
 
 
 '''
-8
-0 1 0 1 0 0 0 1
-2
-1 3
-2 3
- < 0 1 1 1 0 1 0 1 >
--> 1 0 0 0 1 1 0 1 
+import sys
+input = lambda: sys.stdin.readline().rstrip()
 
-10
-1 1 1 1 1 0 1 0 0 1
-4
-1 4
-2 6
-1 3
-2 3
--> 1 1 1 0 0 0 0 1 1 1 
+n = int(input())
+a = [0] + list(map(int, input().split()))
+s_n = int(input())
 
-5
-0 0 0 1 0
-1
-2 1
--> 1 0 0 1 0
+switch = {0:1, 1:0}
 
-25
-0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
-1
-1 1
--> 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 
-1 0 1 0 1 
+for _ in range(s_n):
+    g, num = map(int, input().split())
+    if g == 1:
+        for i in range(num, n+1, num):
+            a[i] = switch[a[i]]
+    else:
+        a[num] = switch[a[num]]
+        i = 1
+        while (num - i >= 1) and (num + i <= n) and (a[num - i] == a[num + i]):
+            a[num-i], a[num+i] = switch[a[num-i]], switch[a[num+i]]
+            i+=1
+
+for idx, el in enumerate(a[1:], start = 1):
+    print(el, end=" ")
+    if not idx % 20:
+        print()
 '''
