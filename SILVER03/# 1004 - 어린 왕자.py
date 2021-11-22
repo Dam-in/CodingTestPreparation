@@ -14,10 +14,3 @@ for _ in range(int(sys.stdin.readline())):   # 입력 받은 수만큼 반복
         elif aDistance < r or bDistance < r:    # 각각의 거리과 원의 반지름 크기 비교
             count += 1
     print(count)
-
-
-
-
-'''
-초기 설계 : 두 점과 각 원들의 거리(xdistance, ydistance)를 구하고 각각의 d와 r중 d가 클 때만 카운트 해준다. 두 점 모두
-'''
